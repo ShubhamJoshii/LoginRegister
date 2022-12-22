@@ -14,7 +14,7 @@ const Register = () => {
     Password: "",
     RePassword:""
   });
-  const port = process.env.PORT || 8000;
+
   let navigate = useNavigate();
   const userData = (e) => {
     const { name, value } = e.target;
@@ -60,7 +60,7 @@ const Register = () => {
   const DataSend = ()=>{
     if(registerData.Password === registerData.RePassword && registerData.Password.length >= 8){
       console.log(registerData);
-      axios.post(`http://localhost:${port}/saveData`,registerData).then((res)=>{
+      axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
         // console.log(res.data.message)
         alert(res.data.message)
         if(res.data.message === "User Already Exists"){
