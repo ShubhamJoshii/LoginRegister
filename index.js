@@ -61,7 +61,7 @@ App.post("/saveData",async (req,res)=>{
             res.send({message:"User Already Exists"})
         }
         else{
-            const Data = await MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
+            const Data = MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
             res.send({message:"User Registered"})
             // console.log(Data)
         }
