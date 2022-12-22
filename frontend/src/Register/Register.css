@@ -1,0 +1,83 @@
+.Register{
+    /* background-color: antiquewhite; */
+    /* width: 30vw; */
+    /* height: 60vh; */
+    border: 1px solid red;
+    border-radius: 20px 20px 10px 10px;
+}
+
+#RegisterImg{
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+.Register .text{
+    background-color: #00A4B3;
+    margin: 8px auto;
+    color: white;
+    width:160px;
+    font-size: 19px;
+    padding: 5px;
+    border-radius:10px;
+    font-family: sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.Register form div{
+    margin: 10px auto;
+    padding: 5px 10px;
+    background-color: #00a4b36b;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    border-radius: 10px;
+
+}
+
+.Register form div input{
+    background: none;
+    border: none;
+    outline: 0;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    width: 95%;
+}
+
+.Register #formBtn{
+    background-color: #00A4B3;
+    color: white;
+    border: none;
+    padding: 7px 3px;
+    font-weight: 700;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.Register p{
+    color: #00A4B3;
+    text-align: end;
+    padding: 5px 18px;
+    font-size: 14px;
+}
+
+
+.Register #formBtn:hover{
+    transform: scale(1.05);
+}
+
+.Register p{
+    color: #00A4B3;
+    text-align: end;
+    padding: 5px 18px;
+    font-size: 14px;
+}
+
+.Register p{
+    cursor: pointer;
+}
