@@ -38,16 +38,13 @@ App.post("/sendData",async (req,res)=>{
         if(user){
             if(user.Password === Password){
                 res.send({message:"User Logined",user:user});
-                res.sendStatus(200)
             }
             else{
                 res.send({message:"Password is In-Correct"});
-                res.sendStatus(200)
             }
         }
         else{
             res.send({message:"User Not Registerted"});
-            res.sendStatus(200)
         }
     })
 
@@ -62,12 +59,10 @@ App.post("/saveData",async (req,res)=>{
     MondelDB.findOne({Email:Email},async (err,resData)=>{
         if(resData){
             res.send({message:"User Already Exists"})
-            res.sendStatus(200)
         }
         else{
             const Data = await MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
             res.send({message:"User Registered"})
-            res.sendStatus(200)
             // console.log(Data)
         }
     })
