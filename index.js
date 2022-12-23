@@ -3,13 +3,13 @@ const Express  = require("express");
 const mongoose = require("mongoose");
 const path = require("path")
 const App = Express();
-
+const {MongoURI} = require("./config/keys")
 App.use(Express.json());
 App.use(Express.urlencoded());
 App.use(cors());
 
 
-mongoose.connect("mongodb+srv://LoginRegisterNew:L8G4Tt58cW7ZkSc8@loginregisternew.3rllnrk.mongodb.net/?retryWrites=true&w=majority",{
+mongoose.connect(MongoURI,{
     useNewUrlParser: true,
     useUnifiedTopology : true
 // mongoose.connect("mongodb://localhost:27017/PracticeLogin").then(()=>{
@@ -27,10 +27,13 @@ const SchemaDB = new mongoose.Schema({
 
 const MondelDB= new mongoose.model("Login",SchemaDB);
 
-App.get("/",(req,res)=>{
-    App.use(Express.static(path.resolve(__dirname,"frontend/build")));
-    res.status(200).sendFile(path.resolve(__dirname,"frontend/build"));
-})
+if(process.env.NODE_ENV == "production"){
+    App.get("/",(req,res)=>{
+        App.use(Express.static(path.resolve(__dirname,"frontend/build")));
+        res.status(200).sendFile(path.resolve(__dirname,"frontend/build"));
+    })
+}
+
 
 App.post("/sendData",async (req,res)=>{
     const {Email,Password} = req.body;
