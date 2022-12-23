@@ -29,22 +29,22 @@ const MondelDB= new mongoose.model("Login",SchemaDB);
 
 App.get("/",(req,res)=>{
     App.use(Express.static(path.resolve(__dirname,"frontend/build")));
-    res.sendFile(path.resolve(__dirname,"frontend/build"));
+    res.status(200).sendFile(path.resolve(__dirname,"frontend/build"));
 })
 
 App.post("/sendData",async (req,res)=>{
     const {Email,Password} = req.body;
-    MondelDB.findOne({Email:Email},(err,user)=>{
+    MondelDB.findOne({Email:Email},async (err,user)=>{
         if(user){
             if(user.Password === Password){
-                res.status(200).send({message:"User Logined",user:user});
+                await res.status(200).send({message:"User Logined",user:user});
             }
             else{
-                res.status(200).send({message:"Password is In-Correct"});
+                await res.status(200).send({message:"Password is In-Correct"});
             }
         }
         else{
-            res.status(200).send({message:"User Not Registerted"});
+            await res.status(200).send({message:"User Not Registerted"});
         }
     })
 
@@ -58,11 +58,11 @@ App.post("/saveData",async (req,res)=>{
     // console.log(Email)
     MondelDB.findOne({Email:Email},async (err,resData)=>{
         if(resData){
-            res.status(200).send({message:"User Already Exists"})
+            await res.status(409).send({message:"User Already Exists"})
         }
         else{
-            const Data = MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
-            res.status(200).send({message:"User Registered"})
+            const Data = await MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
+            await res.status(200).send({message:"User Registered"})
             // console.log(Data)
         }
     })
