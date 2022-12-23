@@ -1,6 +1,8 @@
-import TopImg from "./Img.png";
-import userLogo from "./userLogo.png";
-import lockLogo from "./lockLogo.png";
+import TopImg from "../img/Img.png";
+import userLogo from "../img/userLogo.png";
+import lockLogo from "../img/lockLogo.png";
+import eyeOpen from "../img/eyeOpen.png"
+import eyeClose from "../img/eyeClose.png"
 import "./Login.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -50,6 +52,20 @@ const Login = ({setLoginUser}) => {
       console.log(res.data.user);
     });
   };
+
+  const passwordShow = () =>{
+    const Password = document.getElementById("passwordText");
+    const PasswordShowBtn = document.getElementById("passwordShowBtn");
+    
+    if(Password.type === "password"){
+      Password.type = "text"
+      PasswordShowBtn.src= eyeOpen;
+    }
+    else{
+      Password.type = "password"
+      PasswordShowBtn.src= eyeClose;
+    }
+  }
   useEffect(() => {
     DataSend();
     console.log(userInfo);
@@ -79,12 +95,14 @@ const Login = ({setLoginUser}) => {
         <div id="password">
           <img src={lockLogo} alt="dfas" width="20px" />
           <input
-            type="text"
+            type="password"
             placeholder="Password"
+            id="passwordText"
             onChange={(e) => {
               setuserPassword(e.target.value);
             }}
           />
+          <img src={eyeClose} width="23px" onClick={passwordShow} id="passwordShowBtn" alt="passwordShow" />
         </div>
         <input type="button" id="formBtn" value="Log in" onClick={loginInfo} />
       </form>

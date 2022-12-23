@@ -1,6 +1,8 @@
-import TopImg from "./Img.png";
-import userLogo from "./userLogo.png";
-import lockLogo from "./lockLogo.png";
+import TopImg from "../img/Img.png";
+import userLogo from "../img/userLogo.png";
+import lockLogo from "../img/lockLogo.png";
+import eyeOpen from "../img/eyeOpen.png"
+import eyeClose from "../img/eyeClose.png"
 import "./Register.css";
 import { useState } from "react";
 // import { useEffect } from "react";
@@ -82,6 +84,33 @@ const Register = () => {
 
   }
 
+  const passwordShow = () =>{
+    const Password = document.getElementById("passwordText");
+    const PasswordShowBtn = document.getElementById("passwordShowBtn");
+    
+    if(Password.type === "password"){
+      Password.type = "text"
+      PasswordShowBtn.src= eyeOpen;
+    }
+    else{
+      Password.type = "password"
+      PasswordShowBtn.src= eyeClose;
+    }
+  }
+
+  const RepasswordShow = () =>{
+    const Password = document.getElementById("RepasswordText");
+    const PasswordShowBtn = document.getElementById("RepasswordShowBtn");
+    
+    if(Password.type === "password"){
+      Password.type = "text"
+      PasswordShowBtn.src= eyeOpen;
+    }
+    else{
+      Password.type = "password"
+      PasswordShowBtn.src= eyeClose;
+    }
+  }
 
   return (
     <div className="Register">
@@ -112,8 +141,10 @@ const Register = () => {
             type="text"
             placeholder="Password"
             name="Password"
+            id="passwordText"
             onChange={userData}
           />
+          <img src={eyeClose} width="23px" onClick={passwordShow} id="passwordShowBtn" alt="passwordShow" />
         </div>
         <div id="Re_password">
           <img src={lockLogo} alt="dfas" width="20px" />
@@ -121,8 +152,10 @@ const Register = () => {
             type="text"
             placeholder="Re-Password"
             name="rePassword"
+            id="RepasswordText"
             onChange={userData}
           />
+          <img src={eyeClose} width="23px" onClick={RepasswordShow} id="RepasswordShowBtn" alt="passwordShow" />
         </div>
         <input type="button" id="formBtn" value="Register" onClick={DataSend}/>
       </form>
