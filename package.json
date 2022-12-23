@@ -1,6 +1,7 @@
 {
   "name": "loginregister",
   "version": "1.0.0",
+  "proxy":"http://localhost:8000",
   "description": "Backend",
   "main": "index.js",
   "scripts": {
