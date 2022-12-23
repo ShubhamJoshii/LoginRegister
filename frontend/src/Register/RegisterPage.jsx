@@ -138,7 +138,7 @@ const Register = () => {
         <div id="password">
           <img src={lockLogo} alt="dfas" width="20px" />
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             name="Password"
             id="passwordText"
@@ -149,7 +149,7 @@ const Register = () => {
         <div id="Re_password">
           <img src={lockLogo} alt="dfas" width="20px" />
           <input
-            type="text"
+            type="password"
             placeholder="Re-Password"
             name="rePassword"
             id="RepasswordText"
