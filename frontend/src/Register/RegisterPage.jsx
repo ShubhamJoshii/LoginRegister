@@ -15,6 +15,12 @@ const Register = () => {
     RePassword:""
   });
 
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...'
+  }
+
   let navigate = useNavigate();
   const userData = (e) => {
     const { name, value } = e.target;
@@ -60,7 +66,9 @@ const Register = () => {
   const DataSend = ()=>{
     if(registerData.Password === registerData.RePassword && registerData.Password.length >= 8){
       console.log(registerData);
-      axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
+      axios.post("http://localhost:8000/saveData",registerData,{
+        headers: headers
+      }).then((res)=>{
         // console.log(res.data.message)
         alert(res.data.message)
         if(res.data.message === "User Already Exists"){

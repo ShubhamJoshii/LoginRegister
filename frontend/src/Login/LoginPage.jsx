@@ -15,6 +15,14 @@ const Login = ({setLoginUser}) => {
   const [userEmail, setuserEmail] = useState("");
   const [userPassword, setuserPassword] = useState("");
   const [count, setCount] = useState(0);
+
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...'
+  }
+
+
   let navigate = useNavigate();
 
   const loginInfo = () => {
@@ -27,7 +35,9 @@ const Login = ({setLoginUser}) => {
     // },1000)
   };
   const DataSend = () => {
-    axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+    axios.post("http://localhost:8000/sendData", userInfo,{
+      headers: headers
+    }).then((res) => {
         if(count > 0){
             alert(res.data.message);
         }
