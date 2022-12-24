@@ -59,11 +59,10 @@ const Register = () => {
     })}
   };
 
-  const DataSend = async ()=>{
+  const DataSend = ()=>{
     if(registerData.Password === registerData.RePassword && registerData.Password.length >= 8){
       console.log(registerData);
-      // await axios.post("http://127.0.0.1:8000/saveData",registerData).then((res)=>{
-      await axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
+      axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
         // console.log(res.data.message)
         alert(res.data.message)
         if(res.data.message === "User Already Exists"){
