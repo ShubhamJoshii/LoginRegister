@@ -1,13 +1,12 @@
+import React, {useState} from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import TopImg from "../img/Img.png";
 import userLogo from "../img/userLogo.png";
 import lockLogo from "../img/lockLogo.png";
 import eyeOpen from "../img/eyeOpen.png"
 import eyeClose from "../img/eyeClose.png"
 import "./Register.css";
-import { useState } from "react";
-// import { useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -59,10 +58,10 @@ const Register = () => {
     })}
   };
 
-  const DataSend = ()=>{
+  const DataSend =async ()=>{
     if(registerData.Password === registerData.RePassword && registerData.Password.length >= 8){
       console.log(registerData);
-      axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
+      await axios.post("http://localhost:8000/saveData",registerData).then((res)=>{
         // console.log(res.data.message)
         alert(res.data.message)
         if(res.data.message === "User Already Exists"){
@@ -116,7 +115,7 @@ const Register = () => {
     <div className="Register">
       <img src={TopImg} alt="Imsgfs" id="RegisterImg" width="350px" height="250px" />
       <div className="text">USER REGISTER</div>
-      <form action="">
+      <form action="" method="POST">
         <div>
           <img src={userLogo} alt="dfas" width="20px" />
           <input

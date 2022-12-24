@@ -6,7 +6,10 @@ const App = Express();
 const {MongoURI} = require("./config/keys")
 App.use(Express.json());
 App.use(Express.urlencoded());
-App.use(cors());
+App.use(cors({
+    origin:true,
+    credentials:true
+}));
 
 
 mongoose.connect(MongoURI,{
@@ -29,6 +32,7 @@ const MondelDB= new mongoose.model("Login",SchemaDB);
 
 if(process.env.NODE_ENV == "production"){
     App.get("/",(req,res)=>{
+        console.log(MongoURI)
         App.use(Express.static(path.resolve(__dirname,"frontend/build")));
         res.status(200).sendFile(path.resolve(__dirname,"frontend/build"));
     })
@@ -40,14 +44,14 @@ App.post("/sendData",async (req,res)=>{
     MondelDB.findOne({Email:Email},async (err,user)=>{
         if(user){
             if(user.Password === Password){
-                await res.status(200).send({message:"User Logined",user:user});
+                res.status(200).send({message:"User Logined",user:user});
             }
             else{
-                await res.status(200).send({message:"Password is In-Correct"});
+                res.status(200).send({message:"Password is In-Correct"});
             }
         }
         else{
-            await res.status(200).send({message:"User Not Registerted"});
+            res.status(200).send({message:"User Not Registerted"});
         }
     })
 
@@ -59,13 +63,13 @@ App.post("/saveData",async (req,res)=>{
     // console.log(req.body)
     const {Name, Email, Password} = req.body;
     // console.log(Email)
-    MondelDB.findOne({Email:Email},async (err,resData)=>{
+    await MondelDB.findOne({Email:Email}, async (err,resData)=>{
         if(resData){
-            await res.status(409).send({message:"User Already Exists"})
+            res.status(409).send({message:"User Already Exists"})
         }
         else{
             const Data = await MondelDB.insertMany([{Name:Name,Email:Email,Password:Password}])
-            await res.status(200).send({message:"User Registered"})
+            res.status(200).send({message:"User Registered"})
             // console.log(Data)
         }
     })
@@ -76,3 +80,5 @@ const port = process.env.PORT || 8000;
 App.listen(port,()=>{
     console.log(`Connected at Port ${port}`)
 })
+
+module.exports = App;

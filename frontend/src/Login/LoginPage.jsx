@@ -1,10 +1,10 @@
+import React, { useState, useEffect } from "react";
 import TopImg from "../img/Img.png";
 import userLogo from "../img/userLogo.png";
 import lockLogo from "../img/lockLogo.png";
 import eyeOpen from "../img/eyeOpen.png"
 import eyeClose from "../img/eyeClose.png"
 import "./Login.css";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -28,8 +28,14 @@ const Login = ({setLoginUser}) => {
     //     navigate("/front")
     // },1000)
   };
-  const DataSend = () => {
-    axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+  const headers = {
+    "Content-Type": "application/json",
+    // Authorization: apiKey,
+  };
+
+  const DataSend =async () => {
+    await axios.post("http://localhost:8000/sendData", userInfo, {headers}).then((res) => {
+    
         if(count > 0){
             alert(res.data.message);
         }
