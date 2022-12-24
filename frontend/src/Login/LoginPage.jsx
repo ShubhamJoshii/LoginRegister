@@ -28,9 +28,9 @@ const Login = ({setLoginUser}) => {
     //     navigate("/front")
     // },1000)
   };
-  const DataSend = () => {
+  const DataSend = async () => {
     // axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
-    axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
+    await axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
         if(count > 0){
             alert(res.data.message);
         }
