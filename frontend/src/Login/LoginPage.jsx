@@ -29,16 +29,17 @@ const Login = ({setLoginUser}) => {
     // },1000)
   };
   const DataSend = async () => {
-    // axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
-    await axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
-        if(count > 0){
+    try{
+      // await axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
+        await axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+          if(count > 0){
             alert(res.data.message);
-        }
-
-      if (res.data.message === "Password is In-Correct") {
-        document.getElementById("password").style.backgroundColor = "#FF3300";
-        document.getElementById("email").style.backgroundColor = "#00a4b36b";
-      } else if (res.data.message === "User Logined") {
+          }
+          
+          if (res.data.message === "Password is In-Correct") {
+            document.getElementById("password").style.backgroundColor = "#FF3300";
+            document.getElementById("email").style.backgroundColor = "#00a4b36b";
+          } else if (res.data.message === "User Logined") {
         document.getElementById("password").style.backgroundColor = "#00a4b36b";
         document.getElementById("email").style.backgroundColor = "#00a4b36b";
         setLoginUser(res.data.user);
@@ -52,6 +53,9 @@ const Login = ({setLoginUser}) => {
       }
       console.log(res.data.user);
     });
+  } catch (error){
+    console.log(error.response.data)
+  }
   };
 
   const passwordShow = () =>{
