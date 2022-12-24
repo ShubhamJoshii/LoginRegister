@@ -29,7 +29,8 @@ const Login = ({setLoginUser}) => {
     // },1000)
   };
   const DataSend = () => {
-    axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+    // axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+    axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
         if(count > 0){
             alert(res.data.message);
         }
