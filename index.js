@@ -2,11 +2,11 @@ const cors = require("cors");
 const Express  = require("express");
 const mongoose = require("mongoose");
 const path = require("path")
-const App = Express();
+const app = Express();
 const {MongoURI} = require("./config/keys")
-App.use(Express.json());
-App.use(Express.urlencoded());
-App.use(cors({
+app.use(Express.json());
+app.use(Express.urlencoded());
+app.use(cors({
     origin:true,
     credentials:true
 }));
@@ -31,15 +31,15 @@ const SchemaDB = new mongoose.Schema({
 const MondelDB= new mongoose.model("Login",SchemaDB);
 
 if(process.env.NODE_ENV == "production"){
-    App.get("/",(req,res)=>{
+    app.get("/",(req,res)=>{
         console.log(MongoURI)
-        App.use(Express.static(path.resolve(__dirname,"frontend/build")));
+        app.use(Express.static(path.resolve(__dirname,"frontend/build")));
         res.status(200).sendFile(path.resolve(__dirname,"frontend/build"));
     })
 }
 
 
-App.post("/sendData",async (req,res)=>{
+app.post("/sendData",async (req,res)=>{
     const {Email,Password} = req.body;
     MondelDB.findOne({Email:Email},async (err,user)=>{
         if(user){
@@ -59,7 +59,7 @@ App.post("/sendData",async (req,res)=>{
     // res.send(req.body);
 })
 
-App.post("/saveData",async (req,res)=>{
+app.post("/saveData",async (req,res)=>{
     // console.log(req.body)
     const {Name, Email, Password} = req.body;
     // console.log(Email)
@@ -77,8 +77,8 @@ App.post("/saveData",async (req,res)=>{
     
 const port = process.env.PORT || 8000;
 // const port = 8000;
-App.listen(port,()=>{
+app.listen(port,()=>{
     console.log(`Connected at Port ${port}`)
 })
 
-module.exports = App;
+module.exports = app;
