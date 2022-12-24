@@ -31,7 +31,11 @@ const Login = ({setLoginUser}) => {
   const DataSend = async () => {
     try{
       // await axios.post("http://127.0.0.1:8000/sendData", userInfo).then((res) => {
-        await axios.post("http://localhost:8000/sendData", userInfo).then((res) => {
+        await axios.post("http://localhost:8000/sendData", JSON.stringify(userInfo),{
+          headers:{
+            "Content-Type" : "application/json"
+          }
+        }).then((res) => {
           if(count > 0){
             alert(res.data.message);
           }
@@ -54,7 +58,7 @@ const Login = ({setLoginUser}) => {
       console.log(res.data.user);
     });
   } catch (error){
-    console.log(error.response.data)
+    console.log(error)
   }
   };
 
